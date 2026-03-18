@@ -245,8 +245,14 @@ public class MainFragment extends BaseFragment implements TabLayout.OnTabSelecte
 
         // change the background and icon color of the tab layout:
         // service-colored at the top, app-background-colored at the bottom
-        tabLayout.setBackgroundColor(ThemeHelper.resolveColorFromAttr(requireContext(),
-                bottom ? android.R.attr.windowBackground : R.attr.colorPrimary));
+       if (!bottom) {
+    tabLayout.setBackgroundColor(ThemeHelper.resolveColorFromAttr(requireContext(),
+            R.attr.colorPrimary));
+} else {
+    tabLayout.setBackground(
+            androidx.core.content.ContextCompat.getDrawable(
+                    requireContext(), R.drawable.pill_tab_background));
+       }
 
         @ColorInt final int iconColor = bottom
                 ? ThemeHelper.resolveColorFromAttr(requireContext(), android.R.attr.colorAccent)
